@@ -11,7 +11,7 @@ LastName nvarchar(20) NOT NULL,
 super_SSN int,
 foreign key (super_SSN) references Employee2(SSN),
 department_num int,
-foreign key (department_num) references Department(DNUM)
+foreign key (department_num) references Department2(DNUM)
 )
 
 ----Alter
