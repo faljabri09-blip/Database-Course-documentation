@@ -25,6 +25,9 @@ Fid int foreign key references Faculty(Fid)
 ALTER TABLE Student
 ALTER COLUMN LName nvarchar(10);
 
+ALTER TABLE Student
+ADD GPA DECIMAL(3,2)
+
 ---Alter Hostel_id & Exam_code & course_id & department_id as foreign key in student table
 Alter table Student 
 ADD department_id int foreign key references department(department_id)
@@ -137,11 +140,11 @@ insert into Faculty(Name,Mobile_no,Department,salary,subject_id,Sid) values
 
 select * from Faculty
 
-insert into Student(FName,LName,Age,DOB,phon_no,Fid,Hostel_id,Exam_code,course_id,department_id) VALUES
-('Said','Salim',30,'1995-12-25',93397328,1,1,1,3,2),
-('Fatma','Saif',26,'2022-10-12',55677884,2,2,2,4,3),
-('Mohammed','Kalifa',25,'2000-10-10',940589929,12,3,3,5,4),
-('Ahmed','Aljabri',15,'2017-11-25',774673888,13,4,4,6,5)
+insert into Student(FName,LName,Age,DOB,phon_no,Fid,Hostel_id,Exam_code,course_id,department_id,GPA) VALUES
+('Said','Salim',30,'1995-12-25',93397328,1,1,1,3,2,3.40),
+('Fatma','Saif',26,'2022-10-12',55677884,2,2,2,4,3,4),
+('Mohammed','Kalifa',25,'2000-10-10',940589929,12,3,3,5,4,3.15),
+('Ahmed','Aljabri',15,'2017-11-25',774673888,13,4,4,6,5,2.90)
 
 select * from Student
 
