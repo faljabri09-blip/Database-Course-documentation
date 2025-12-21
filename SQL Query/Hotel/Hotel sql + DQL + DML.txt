@@ -1,0 +1,147 @@
+CREATE DATABASE Hotel
+
+USE Hotel
+
+----create Branches table
+
+create table Branches(
+branch_id int primary key identity(1,1),
+branch_name varchar(20) NOT NULL,
+location varchar(20) NOT NULL
+)
+
+----Alter Branches table
+
+Alter table Branches
+ADD staff_id int foreign key references Staff(staff_id)
+
+Alter table Branches
+ADD room_num int foreign key references Room(room_num)
+
+----create Room table
+
+create table Room(
+room_num int primary key identity(100,1),
+room_type varchar(20) NOT NULL,
+branch_id int foreign key references Branches(branch_id)
+)
+
+----Alter Room table 
+
+Alter table Room
+Add staff_id int foreign key references Staff(staff_id)
+
+Alter table Room
+ADD customer_id int foreign key references Customer(customer_id)
+
+
+---create Room_Available table
+
+create table Room_Available(
+room_num int,
+branch_id int,
+availability_room BIT NOT NULL,
+primary key(room_num, branch_id,availability_room)
+)
+
+----create Booking table
+
+create table Booking(
+booking_id int primary key identity(200,1),
+check_in date NOT NULL,
+check_out date NOT NULL,
+room_num int foreign key references Room(room_num)
+)
+
+----Alter Booking table
+
+Alter table Booking
+Add customer_id int foreign key references Customer(customer_id)
+
+Alter table Booking
+Add staff_id int foreign key references Staff(staff_id)
+
+----create Staff table
+
+create table Staff(
+staff_id int primary key identity(300,1),
+staff_name varchar(20) NOT NULL,
+jop_title varchar(30) NOT NULL,
+salary decimal(10,2) NOT NULL,
+branch_id int foreign key references Branches(branch_id),
+booking_id int foreign key references Booking(booking_id)
+)
+
+----create customer table 
+
+create table customer(
+customer_id int primary key identity(400,1),
+customer_name varchar(30) NOT NULL,
+customer_email varchar(50) NOT NULL,
+phone_no int not null,
+booking_id int foreign key references Booking(booking_id),
+room_num int foreign key references Room(room_num)
+)
+
+----insert into tables 
+
+---insert into Branches table
+
+INSERT INTO Branches(branch_name, location, staff_id, room_num) VALUES
+('Sunrise Hotel', 'Muscat',300,100),
+('SeaView Resort', 'Salalah',301,101),
+('Mountain Inn', 'Nizwa',302,102),
+('City Center Hotel', 'Sohar',303,103)
+
+select * from Branches
+
+---insert into Room table 
+
+INSERT INTO Room (room_type, branch_id, staff_id, customer_id) VALUES
+('Single', 1,300,400),
+('Double', 1,301,401),
+('Suite', 2,302,402),
+('Deluxe', 3,303,403)
+
+select * from Room
+
+
+---insert into Room_Available table 
+
+INSERT INTO Room_Available (room_num, branch_id, availability_room) VALUES
+(100, 1, 1),  -- available
+(101, 1, 0),  -- not available
+(102, 2, 1),
+(103, 3, 1)
+
+select * from Room_Available
+
+----insert into Booking table 
+
+INSERT INTO Booking(check_in, check_out, room_num, customer_id,staff_id) VALUES
+('2025-12-25', '2025-12-28', 100,400,300),
+('2025-12-26', '2025-12-27', 101,401,301),
+('2025-12-30', '2026-01-02', 102,402,302),
+('2026-01-01', '2026-01-05', 103,403,303)
+
+select * from Booking
+
+----insert into staff table 
+
+INSERT INTO Staff (staff_name, jop_title, salary, branch_id, booking_id) VALUES
+('Ali', 'Receptionist', 1200.00, 1, 200),
+('Fatma', 'Manager', 2000.00, 1, 201),
+('Sultan', 'Receptionist', 1300.00, 2, 202),
+('Layla', 'Housekeeping', 1100.00, 3, 203)
+
+select * from Staff
+
+----insert into Customer table 
+
+INSERT INTO Customer(customer_name, customer_email, phone_no, booking_id, room_num) VALUES
+('Ahmed', 'ahmed@example.com', 12345678, 200, 100),
+('Sara', 'sara@example.com', 23456789, 201, 101),
+('Khalid', 'khalid@example.com', 34567890, 202, 102),
+('Mona', 'mona@example.com', 45678901, 203, 103)
+
+select * from Customer
