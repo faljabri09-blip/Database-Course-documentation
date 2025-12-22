@@ -98,4 +98,3 @@ LEFT JOIN Reservation R ON FL.leg_no = FL.leg_no
 ORDER BY FL.leg_no
 
 
-
