@@ -108,7 +108,7 @@ WHERE jop_title = 'Manager'
 SELECT 
     C.customer_name,
     B.check_in,
-	B.check_out,
-	B.room_num
+    B.check_out,
+    B.room_num
 FROM customer C LEFT JOIN Booking B
 ON C.booking_id = B.booking_id
